@@ -17,4 +17,6 @@ jobs:
         run: mvn --batch-mode --update-snapshots verify
   docker-build:
     steps:
-      run: docker build . --file Dockerfile
+      - uses: actions/checkout@v2
+      - name: Build docker image
+      - run: docker build . --file Dockerfile
