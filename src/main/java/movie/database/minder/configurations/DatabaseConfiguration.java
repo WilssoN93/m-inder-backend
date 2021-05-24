@@ -25,8 +25,8 @@ public class DatabaseConfiguration {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
         dataSourceBuilder.url("jdbc:mysql://localhost:3306/minder");
-        dataSourceBuilder.username("root");
-        dataSourceBuilder.password("Arsenal93");
+        dataSourceBuilder.username("WilssoN");
+        dataSourceBuilder.password("pass");
         return dataSourceBuilder.build();
     }
 
