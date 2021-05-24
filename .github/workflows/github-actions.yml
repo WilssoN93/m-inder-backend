@@ -20,21 +20,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: login
-        uses: actions/heroku@master
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        with:
-          args: container:login
-      - name: push
-        uses: actions/heroku@master
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        with:
-          args: container:push -a hardwar web
-      - name: release
-        uses: actions/heroku@master
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        with:
-          args: container:release -a hardwar web
+      - name: Docker build
+        run: mvn docker build . --file Dockerfile
