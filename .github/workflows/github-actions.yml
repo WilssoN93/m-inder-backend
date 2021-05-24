@@ -59,5 +59,3 @@ jobs:
           email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.API_KEY }}
           heroku_app_name: ${{ secrets.APP_NAME }}
-          dockerfile_directory: ./
-          process_type: web
