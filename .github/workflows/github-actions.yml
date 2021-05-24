@@ -60,9 +60,9 @@ jobs:
           path: target/
       - uses: gonuit/heroku-docker-deploy@v1.3.2 # GitHub action name (leave it as it is).
         with:
-          email: wilssondaniel@gmail.com
-          heroku_api_key: 57eb2e9c-d240-435a-a16c-b379270284d1
-          heroku_app_name: hardwar
+          email: ${{secrets.HEROKU_EMAIL}}
+          heroku_api_key: ${{secrets.API_KEY}}
+          heroku_app_name: ${{secrets.APP_NAME}}
           dockerfile_directory: ./
           dockerfile_name: Dockerfile
           process_type: web
