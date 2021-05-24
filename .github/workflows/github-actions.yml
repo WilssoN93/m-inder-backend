@@ -59,3 +59,4 @@ jobs:
           email: wilssondaniel@gmail.com
           heroku_api_key: 57eb2e9c-d240-435a-a16c-b379270284d1
           heroku_app_name: hardwar
+          dockerfile_directory: ./
