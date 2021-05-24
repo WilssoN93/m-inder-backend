@@ -54,11 +54,10 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v2
-        uses: gonuit/heroku-docker-deploy@v1.3.2 # GitHub action name (leave it as it is).
+      - uses: gonuit/heroku-docker-deploy@v1.3.2 # GitHub action name (leave it as it is).
         with:
           email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.API_KEY }}
           heroku_app_name: ${{ secrets.APP_NAME }}
           dockerfile_directory: ./
           process_type: web
-
