@@ -43,26 +43,22 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml -Dmaven.test.skip=true
 
-      - run: echo hello > target/*.jar
-
       - uses: actions/upload-artifact@v1
         with:
-          name: de-sy-file
+          name: jarfile
           path: target/
 
   docker-build:
     runs-on: ubuntu-latest
-    name: Run mvn build
+    name: Run docker build
     needs: build
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v1
+        uses: gonuit/heroku-docker-deploy@v1.3.2 # GitHub action name (leave it as it is).
         with:
-          name: de-sy-file
-          path: target/
-      - name: Set up docker build
-        run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
-          docker build .
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.API_KEY }}
+          heroku_app_name: ${{ secrets.APP_NAME }}
+          dockerfile_directory: ./
+          process_type: web
+
