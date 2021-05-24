@@ -62,7 +62,7 @@ jobs:
           path: target/
       - name: Set up docker build
         run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
           docker build .
