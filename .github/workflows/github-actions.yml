@@ -19,7 +19,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    name: Running tests
+    name: test
     needs: compile
     steps:
       - uses: actions/checkout@v2
@@ -32,7 +32,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    name: Run mvn build
+    name: build
     needs: test
     steps:
       - uses: actions/checkout@v2
@@ -54,6 +54,10 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v1
+        with:
+          name: jarfile
+          path: target/
       - uses: gonuit/heroku-docker-deploy@v1.3.2 # GitHub action name (leave it as it is).
         with:
           email: wilssondaniel@gmail.com
