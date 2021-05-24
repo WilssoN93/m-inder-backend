@@ -7,7 +7,7 @@ on:
 jobs:
   compile:
     runs-on: ubuntu-latest
-    name: Running Java compiler
+    name: compile
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 11
@@ -32,7 +32,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    name: Run mvn build and generate coverage report
+    name: Run mvn build
     needs: test
     steps:
       - uses: actions/checkout@v2
@@ -42,3 +42,27 @@ jobs:
           java-version: 11
       - name: Build with Maven
         run: mvn -B package --file pom.xml -Dmaven.test.skip=true
+
+      - run: echo hello > target/*.jar
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: de-sy-file
+          path: target/
+
+  docker-build:
+    runs-on: ubuntu-latest
+    name: Run mvn build
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v1
+        with:
+          name: de-sy-file
+          path: target/
+      - name: Set up docker build
+        run: |
+        # Build a docker container and
+        # push it to ECR so that it can
+        # be deployed to ECS.
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
